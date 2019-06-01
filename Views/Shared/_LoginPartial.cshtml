@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+        
+                    
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        @if (DotNetBucketMvc.Common.AppConfig.S3Enable)
+        {
+            <img src="@Url.Action("GetPhotos", "Home" )" style="width:50px;height:50px; background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 10px;
+    border-radius: 20px;
+    padding: 6px;
+    box-shadow: 0px 0px 5px #888;" />
+
+        }
+        else
+        {
+            <img src="@Url.Action("UserPhotos", "Home" )" style="width:50px;height:50px; background: #FFFFFF;
+    margin: auto;
+      -moz-border-radius: 10px;
+    border-radius: 20px;
+    padding: 6px;
+    box-shadow: 0px 0px 5px #888;" />
+        }
+
+
+    </li>
+    <li>
+
+        @if (ViewData.ContainsKey("ProfilePicUrl"))
+        {
+
+
+            @*<img src="@Url.Content( @ViewData["ProfilePicUrl"].ToString())" class="profile-picture user-image" alt="Daz Image" />
+            <span class="hidden-xs">
+                @ViewData["DisplayName"].ToString()
+
+            </span>*@
+        }
+        @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="@Url.Action("UserPhotos", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 60px;
+    border-radius: 100px;
+    padding: 6px;
+    box-shadow: 0px 0px 20px #888;" />
+
+        </a>*@
+    </li>
+    <li>
+        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+</ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

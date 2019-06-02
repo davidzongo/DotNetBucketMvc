@@ -117,9 +117,6 @@ namespace DotNetBucketMvc.Controllers
                 }
             }
 
-//            string Path = HttpContext.Current.Request.PhysicalApplicationPath + FileUpload1.FileName;
-//var Path = Server.MapPath(FileUpload1.FileName);
-           
             if (user != null && file !=null)
             {
                 if (AppConfig.S3Enable)
